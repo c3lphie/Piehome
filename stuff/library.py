@@ -2,6 +2,7 @@
 
 #library
 import urllib.request
+from datetime import date
 import json
 
 
@@ -11,8 +12,17 @@ def weather(key,latitude,longtitude):
 	
 	parsed_forecast = json.loads(forecast)
 
-	print(parsed_forecast["hourly"])
-	print("https://api.darksky.net/forecast/"+key+"/"+latitude+","+longtitude+"?exclude=[currently,minutely,alerts,flags]&lang=da")
+	#print(parsed_forecast["hourly"])
+
+	#print("https://api.darksky.net/forecast/"+key+"/"+latitude+","+longtitude+"?exclude=[currently,minutely,alerts,flags]&lang=da")
+
+	weekday = date.today()
+	print(parsed_forecast["daily"]["summary"]+'\n---\n')
+	for day in parsed_forecast["daily"][""]:
+		day = dict( day = date.strftime(weekday,'%A'),
+					sum = day
+					)
+
 
 
 
