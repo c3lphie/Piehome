@@ -8,23 +8,14 @@ import json
 
 #vejr-prognose
 def weather(key,latitude,longtitude):
-	forecast = urllib.request.urlopen("https://api.darksky.net/forecast/"+key+"/"+latitude+","+longtitude+"?exclude=[currently,minutely,alerts,flags]&lang=da").read()
-	
+	forecast = urllib.request.urlopen("https://api.darksky.net/forecast/"+key+"/"+latitude+","+longtitude).read()
 	parsed_forecast = json.loads(forecast)
-
-	#print(parsed_forecast["hourly"])
-
-	#print("https://api.darksky.net/forecast/"+key+"/"+latitude+","+longtitude+"?exclude=[currently,minutely,alerts,flags]&lang=da")
-
+	forecast_list = []
 	weekday = date.today()
-	print(parsed_forecast["daily"]["summary"]+'\n---\n')
-	for day in parsed_forecast["daily"][""]:
-		day = dict( day = date.strftime(weekday,'%A'),
-					sum = day
-					)
+	forecast_list.append(date.strftime(weekday, "%A")+": "+parsed_forecast["daily"]["summary"]+'\n---')
+	for x in range(0,6):
+		forecast_list.append(parsed_forecast["daily"]["data"][x]["summary"])
 
+	return forecast_list
 
-
-
-weather("97bca87e978b87f27efdcf3fa67dae96","57.048","9.935")
-
+#
