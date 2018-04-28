@@ -4,6 +4,7 @@
 import urllib.request
 from datetime import date
 import json
+import icalendar
 
 
 #vejr-prognose
@@ -18,4 +19,8 @@ def weather(key,latitude,longtitude):
 
 	return forecast_list
 
-#
+
+
+
+#ical
+#def calendar ():
